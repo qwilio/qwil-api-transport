@@ -11,7 +11,11 @@ const bannerLong = `/**
  * @version ${pkg.version}
  */`;
 const bannerShort = `/*! ${pkg.name} version ${pkg.version} */`;
-const defaultOutBase = {compact: true, banner: bannerLong, name: pkg.name};
+const defaultOutBase = {
+  compact: true,
+  banner: bannerLong,
+  name: pkg.name,
+};
 const cjOutBase = {...defaultOutBase, compact: false, format: "cjs", exports: "named"};
 const esmOutBase = {...defaultOutBase, format: "esm"};
 const umdOutBase = {...defaultOutBase, format: "umd"};

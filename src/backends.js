@@ -1,15 +1,15 @@
-import Postis from 'postis';
+import { Postis } from './thirdParty/postis.js';
 
 
 export class PostMessageTransportBackend {
   constructor(params) {
     const { scope, window } = params;
-    this.postis = Postis({ scope, window })
+    this.postis = Postis({ scope, window });
 
     this._handleMessage = (message) => {
       // placeholder handler until actual one set with setMessageHandler()
       console.error('Unhandled incoming message', message);
-    }
+    };
 
     // Only listen to "api" messages
     this.postis.listen('api', message => this._handleMessage(message));
@@ -19,8 +19,8 @@ export class PostMessageTransportBackend {
     this.postis.send({
       // Outgoing payload also encapsulated within "api" messages
       method: 'api',
-      params: message,
-    })
+      params: message
+    });
   }
 
   setMessageHandler(callback) {
