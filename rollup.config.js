@@ -3,23 +3,24 @@ import {createRequire} from "node:module";
 const require = createRequire(import.meta.url);
 const pkg = require("./package.json");
 const year = new Date().getFullYear();
-const bannerLong = `/**
- * ${pkg.name}
- *
- * @copyright ${year} ${pkg.author}
+const now = (new Date()).toUTCString();
+const banner = `/**!
+ * ${pkg.name} (built ${now})
+ * 
+ * @copyright ${year} Qwil
  * @license ${pkg.license}
  * @version ${pkg.version}
- */`;
-const bannerShort = `/*! ${pkg.name} version ${pkg.version} */`;
+ */
+ `;
 const defaultOutBase = {
   compact: true,
-  banner: bannerLong,
+  banner,
   name: pkg.name,
 };
 const cjOutBase = {...defaultOutBase, compact: false, format: "cjs", exports: "named"};
 const esmOutBase = {...defaultOutBase, format: "esm"};
 const umdOutBase = {...defaultOutBase, format: "umd"};
-const minOutBase = {banner: bannerShort, name: pkg.name, plugins: [terser()], sourcemap: true};
+const minOutBase = {name: pkg.name, plugins: [terser()], sourcemap: true};
 
 
 export default [
